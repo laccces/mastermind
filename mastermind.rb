@@ -2,27 +2,7 @@
 @computer_combo = [1, 2, 3, 4]
 @i = 0
 
-=begin
-def computer_code
-  r = Random.new
-  @computer_combo[0] = (r.rand(1...6))
-  @computer_combo[1] = (r.rand(1...6))
-  @computer_combo[2] = (r.rand(1...6))
-  @computer_combo[3] = (r.rand(1...6))
-end
-=end
-
-# computer_code  
-
-p @computer_combo
-
-puts "Please guess a 4 digit combination. Digits are between 1 & 6."
-
-# @user_guess = gets.split(%r{\s*})
-
-@user_guess = [2, 5, 6, 4]
-
-p @user_guess
+#methods
 
 def half_match_checker
   if @computer_combo.include?(@user_guess[0])
@@ -54,8 +34,34 @@ def full_match_checker
   end
 end
 
-half_match_checker
-full_match_checker
-p @board.shuffle
 
-# Up to 12 turns
+=begin
+def computer_code
+  r = Random.new
+  @computer_combo[0] = (r.rand(1...6))
+  @computer_combo[1] = (r.rand(1...6))
+  @computer_combo[2] = (r.rand(1...6))
+  @computer_combo[3] = (r.rand(1...6))
+end
+=end
+
+# computer_code  
+
+puts "Game started."
+
+while @i < 12
+  puts "Please guess a 4 digit combination. Digits must be between 1 & 6."
+
+  @user_guess = gets.split(%r{\s*})
+
+  puts "Your guess is:"
+  p @user_guess
+
+  p half_match_checker
+  p full_match_checker
+  break if @board == ["!", "!", "!", "!"]
+  puts "Here is your score. A * indicates a number that is in the code but not in the correct place, and a ! indicates a correct number in the correct place. This code has been shuffled, so appears in a random order. 'nil' is neither."
+  p @board.shuffle
+  @i += 1
+end
+
