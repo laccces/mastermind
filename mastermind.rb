@@ -36,18 +36,15 @@ def full_match_checker
   p @board
 end
 
-
-=begin
 def computer_code
   r = Random.new
-  @computer_combo[0] = (r.rand(1...6))
-  @computer_combo[1] = (r.rand(1...6))
-  @computer_combo[2] = (r.rand(1...6))
-  @computer_combo[3] = (r.rand(1...6))
+  @computer_combo[0] = (r.rand(1...6)).to_s
+  @computer_combo[1] = (r.rand(1...6)).to_s
+  @computer_combo[2] = (r.rand(1...6)).to_s
+  @computer_combo[3] = (r.rand(1...6)).to_s
 end
-=end
 
-# computer_code  
+computer_code
 
 puts "Game started."
 
