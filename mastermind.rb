@@ -46,7 +46,50 @@ if guess_choice == "1"
 
   player_code = gets.split(%r{\s*})
 
+  def computer_guess
+    @computer_guess = computer_guess
+    r = Random.new
+    if @computer_combo[0] != "!"
+      @computer_combo[0] = (r.rand(1...6)).to_s
+    end
+
+    if @computer_combo[1] != "!"
+      @computer_combo[1] = (r.rand(1...6)).to_s
+    end
+    
+    if @computer_combo[2] != "!"
+      @computer_combo[2] = (r.rand(1...6)).to_s
+    end
+    
+    if @computer_combo[0] != "!"
+      @computer_combo[3] = (r.rand(1...6)).to_s
+    end
+  end
+
+  while @i < 12
+    @computer_guess 
+
+    @computer_guess = @user_guess
+
+    @board = []
+
+    puts "The computer guessed: #{@computer_guess}"
+
+    half_match_checker
+    full_match_checker
+    
+    break if @board == ["!", "!", "!", "!"]
+    @i += 1
+  end
+
+  if @board == ["!", "!", "!", "!"] 
+    puts "Computer wins!"
+  end
   
+  if @i == 12
+    puts "Computer loses. You win!"
+  end
+
   
 elsif guess_choice == "2"
   def computer_code
