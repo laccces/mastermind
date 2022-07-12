@@ -36,41 +36,59 @@ def full_match_checker
   p @board
 end
 
-def computer_code
-  r = Random.new
-  @computer_combo[0] = (r.rand(1...6)).to_s
-  @computer_combo[1] = (r.rand(1...6)).to_s
-  @computer_combo[2] = (r.rand(1...6)).to_s
-  @computer_combo[3] = (r.rand(1...6)).to_s
+puts "Who is guessing? Put 1 for computer to guess and 2 for you to guess."
+
+p guess_choice = gets.chomp
+
+
+if guess_choice == "1"
+  puts "Enter a 4 digit code, and the computer will try to guess it."
+
+  player_code = gets.split(%r{\s*})
+
+  
+  
+elsif guess_choice == "2"
+  def computer_code
+    r = Random.new
+    @computer_combo[0] = (r.rand(1...6)).to_s
+    @computer_combo[1] = (r.rand(1...6)).to_s
+    @computer_combo[2] = (r.rand(1...6)).to_s
+    @computer_combo[3] = (r.rand(1...6)).to_s
+  end
+
+  computer_code
+  
+  puts "Game started."
+  
+  while @i < 12
+    puts "Please guess a 4 digit combination. Digits must be between 1 & 6."
+  
+    @board = []
+  
+    @user_guess = gets.split(%r{\s*})
+  
+    puts "Your guess is:"
+    p @user_guess
+  
+    half_match_checker
+    full_match_checker
+    break if @board == ["!", "!", "!", "!"]
+    puts "Here is your score. A * indicates a number that is in the code but not in the correct place, and a ! indicates a correct number in the correct place. This code has been shuffled, so appears in a random order."
+    p @board.shuffle  
+    @i += 1
+  end
+  
+  if @board == ["!", "!", "!", "!"] 
+    puts "You win!"
+  end
+  
+  if @i == 12
+    puts "Sorry, you've run out of guesses. You lose. The computer code was #{@computer_combo}."
+  end
+else
+  puts "Error. Please enter 1 or 2."
 end
 
-computer_code
 
-puts "Game started."
-
-while @i < 12
-  puts "Please guess a 4 digit combination. Digits must be between 1 & 6."
-
-  @board = []
-
-  @user_guess = gets.split(%r{\s*})
-
-  puts "Your guess is:"
-  p @user_guess
-
-  half_match_checker
-  full_match_checker
-  break if @board == ["!", "!", "!", "!"]
-  puts "Here is your score. A * indicates a number that is in the code but not in the correct place, and a ! indicates a correct number in the correct place. This code has been shuffled, so appears in a random order."
-  p @board.shuffle  
-  @i += 1
-end
-
-if @board == ["!", "!", "!", "!"] 
-  puts "You win!"
-end
-
-if @i == 12
-  puts "Sorry, you've run out of guesses. You lose. The computer code was #{@computer_combo}."
-end
 
