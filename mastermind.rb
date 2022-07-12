@@ -42,12 +42,12 @@ p guess_choice = gets.chomp
 
 
 if guess_choice == "1"
-  puts "Enter a 4 digit code, and the computer will try to guess it."
+  puts "Enter a 4 digit code (numbers must be between 1 and 6), and the computer will try to guess it."
 
-  player_code = gets.split(%r{\s*})
-
-  def computer_guess
-    @computer_guess = computer_guess
+  @player_code = gets.split(%r{\s*})
+  
+  while @i < 12
+    def computer_guess
     r = Random.new
     if @computer_combo[0] != "!"
       @computer_combo[0] = (r.rand(1...6)).to_s
@@ -61,28 +61,37 @@ if guess_choice == "1"
       @computer_combo[2] = (r.rand(1...6)).to_s
     end
     
-    if @computer_combo[0] != "!"
+    if @computer_combo[3] != "!"
       @computer_combo[3] = (r.rand(1...6)).to_s
     end
   end
-
-  while @i < 12
-    @computer_guess 
-
-    @computer_guess = @user_guess
-
-    @board = []
-
-    puts "The computer guessed: #{@computer_guess}"
-
-    half_match_checker
-    full_match_checker
     
-    break if @board == ["!", "!", "!", "!"]
+  computer_guess 
+
+    puts "The computer guessed: #{@computer_combo}"
+
+    def comp_match_checker
+      if @player_code[0].eql?(@computer_combo[0])
+        @computer_combo[0] = "!"
+      end
+      if @player_code[1].eql?(@computer_combo[1])
+        @computer_combo[1] = "!"
+      end
+      if @player_code[2].eql?(@computer_combo[2])
+        @computer_combo[2] = "!"
+      end
+      if @player_code[3].eql?(@computer_combo[3])
+        @computer_combo[3] = "!"
+      end
+    end
+    
+    comp_match_checker
+    
+    break if @computer_combo == ["!", "!", "!", "!"]
     @i += 1
   end
 
-  if @board == ["!", "!", "!", "!"] 
+  if @computer_combo == ["!", "!", "!", "!"] 
     puts "Computer wins!"
   end
   
