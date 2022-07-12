@@ -42,7 +42,7 @@ p guess_choice = gets.chomp
 
 
 if guess_choice == "1"
-  puts "Enter a 4 digit code (numbers must be between 1 and 6), and the computer will try to guess it."
+  puts "Enter a 4 digit number (numbers must be between 1 and 6), and the computer will try to guess it in 12 goes."
 
   @player_code = gets.split(%r{\s*})
   
